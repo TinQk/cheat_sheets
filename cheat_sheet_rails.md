@@ -18,12 +18,13 @@ Créer la base de donnée :
 
 
 <br>
+
 ### Console
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
 `$ rails console` ou `$ rails c`
 
-##### CRUD : Create Read Update Delete
+#### CRUD : Create Read Update Delete
 
 * Créer un User en base :<br>
 `User.create(name:"Jean-Michel", email:"jm@gmail.com")`
@@ -41,7 +42,7 @@ truc.save
 * Supprimer un truc :<br>
 `truc.delete` supprime un truc de la bd
 
-##### Association
+#### Association
 
 Pour associer une instance à une autre (et vérifier si la jointure marche) :<br>
 * si relation avec n : `shakespeare.books << macbeth`
@@ -51,6 +52,7 @@ Puis pour check si ça a marché : `shakespeare.books`
 
 
 <br>
+
 ### Migrations
 
 **Gérer une base de données dans rails se fait via des migrations qui crées et modifient des tables. On les retrouve dans le dossier db.**
@@ -92,9 +94,10 @@ Tout se passe dans "def change". A la place de create_table on peut avoir d'autr
 
 
 <br>
+
 ### MVC = Model View Controller
 
-##### Models :
+#### Models :
 
 Les modèles récupérent les infos depuis la db pour permettre aux view de les utiliser.
 
@@ -104,20 +107,21 @@ Créer un modèle et la migration correspondante :
 
 **Class name :** cours du jeudi semaine 4 à check
 
-##### Routes :
+#### Routes :
 
 check lundi semaine 5
 
-##### Controllers :
+#### Controllers :
 
 check lundi semaine 5
 
 
 
 <br>
+
 ### Lier deux tables en bd : (2 étapes)
 
-##### Relation 1-1 ou 1-n
+#### Relation 1-1 ou 1-n
 
 - Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra (belongs) à l'autre objet (cf partie migration)
 
@@ -127,7 +131,7 @@ check lundi semaine 5
   - `has_and_belongs_to_many :trucs`
 
 
-##### Relation n-n
+#### Relation n-n
 
 Une table de jointure doit exister entre les deux tables :
 
@@ -141,6 +145,7 @@ Une table de jointure doit exister entre les deux tables :
 
 
 <br>
+
 ### SEED
 
 Rempli une base de donnée avec des entrée pré-programmées ou random depuis le fichier : /db/seeds.rb
@@ -172,6 +177,7 @@ end
 
 
 <br>
+
 ### RAILS-ERD (SCHEMA)
 
 Créer un SCHEMA de la base de donnée de rails en pdf :
