@@ -5,21 +5,18 @@
 ### Basics
 
 Initialisation dossier rails :
+
     $ rails new nom_du_projet
 
-
 Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
-```
-$ rails new -d postgresql nom_du_project
-```
-
+`$ rails new -d postgresql nom_du_project`
 
 Installer toutes les gems du gemfile :
 `$ bundle install`
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
-`$ rails console` ou `$ rails c'
-```
+`$ rails console` ou `$ rails c`
+
 
 ### Migrations :
 
@@ -32,7 +29,7 @@ Gérer une base de données dans rails se fait via des migrations (dossier db) :
     Les migrations sont créées dans le dossier db
     Les migrations peuvent créer des tables ou modifier des tables existantes
     ex :
-```
+```ruby
     class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
