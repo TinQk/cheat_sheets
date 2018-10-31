@@ -2,7 +2,7 @@
 ## RAILS - ACTIVERECORD - POSTGRESQL
 <br>
 
-### Init
+### INIT
 
 Initialisation dossier rails :<br>
 `$ rails new nom_du_projet`
@@ -19,7 +19,7 @@ Créer la base de donnée :
 
 <br>
 
-### Console
+### CONSOLE
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
 `$ rails console` ou `$ rails c`
@@ -53,7 +53,7 @@ Puis pour check si ça a marché : `shakespeare.books`
 
 <br>
 
-### Migrations
+### MIGRATIONS
 
 **Gérer une base de données dans rails se fait via des migrations qui crées et modifient des tables. On les retrouve dans le dossier db.**
 <br><br>
@@ -95,7 +95,7 @@ Tout se passe dans "def change". A la place de create_table on peut avoir d'autr
 
 <br>
 
-### MVC = Model View Controller
+### MVC = MODEL VIEW CONTROLLER
 
 #### Models :
 
@@ -119,9 +119,9 @@ check lundi semaine 5
 
 <br>
 
-### Lier deux tables en bd : (2 étapes)
+### LIER DEUX TABLES EN DB
 
-#### Relation 1-1 ou 1-n
+#### Relation 1-1 ou 1-n : (2 étapes)
 
 - Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra (belongs) à l'autre objet (cf partie migration)
 
@@ -131,7 +131,7 @@ check lundi semaine 5
   - `has_and_belongs_to_many :trucs`
 
 
-#### Relation n-n
+#### Relation n-n : (2 étapes)
 
 Une table de jointure doit exister entre les deux tables :
 
