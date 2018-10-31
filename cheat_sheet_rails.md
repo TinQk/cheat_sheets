@@ -11,8 +11,6 @@ Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
 ```$ rails new -d postgresql nom_du_project```
 
 
-fdsfs
-
 Installer toutes les gems du gemfile :
 ```$ bundle install
 
