@@ -4,10 +4,9 @@
 
 ### Basics
 
-Initialisation dossier rails :<br>
-```
-$ rails new nom_du_projet
-```
+Initialisation dossier rails :
+    $ rails new nom_du_projet
+
 
 Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
 ```
@@ -16,17 +15,10 @@ $ rails new -d postgresql nom_du_project
 
 
 Installer toutes les gems du gemfile :
-```
-$ bundle install
-```
+`$ bundle install`
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
-```
-$ rails console
-```
-ou
-```
-$ rails c
+`$ rails console` ou `$ rails c'
 ```
 
 ### Migrations :
