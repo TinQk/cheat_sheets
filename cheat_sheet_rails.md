@@ -2,11 +2,10 @@
 ## RAILS - ACTIVERECORD - POSTGRESQL
 <br>
 
-### Basics
+### Init
 
-Initialisation dossier rails :
-
-    $ rails new nom_du_projet
+Initialisation dossier rails :<br>
+`$ rails new nom_du_projet`
 
 Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
 `$ rails new -d postgresql nom_du_project`
@@ -14,68 +13,86 @@ Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
 Installer toutes les gems du gemfile :
 `$ bundle install`
 
+### Console
+
 Lancer la console pour s'amuser avec la base de donnée :<br>
 `$ rails console` ou `$ rails c`
 
+#### CRUD : Create Read Update Delete
 
-### Migrations :
+* Créer un User en base :<br>
+`User.create(name:"Jean-Michel", email:"jm@gmail.com")`
+ou
+```ruby
+truc = User.new
+truc.name = "Jean-Michel"
+truc.save
+```
+
+* Récupère le User dont l'id est 4 (READ) :<br>
+`User.find(4)`
+* Update un truc :<br>
+`truc.update(...)`
+* Supprimer un truc :<br>
+`truc.delete` supprime un truc de la bd
+
+
+### Migrations
 
 Gérer une base de données dans rails se fait via des migrations (dossier db) :
 
-    Créér une migration :
-    $ rails generate migration NomDeTaMigration
+Créér une table :<br>
+`$ rails generate migration CreateTableName` ou `$ rails g migration CreateTableName`
 
-    Les noms de migrations sont en CamelCase.
-    Les migrations sont créées dans le dossier db
-    Les migrations peuvent créer des tables ou modifier des tables existantes
-    ex :
+Créer une table de jointure : `$ rails g `
+
+* Les noms de migrations sont en CamelCase.
+* Les migrations sont créées dans le dossier db
+* Les migrations peuvent créer des tables ou modifier des tables existantes
+
+ex d'une migration qui crée une table "users" :
+
 ```ruby
-    class CreateUsers < ActiveRecord::Migration[5.2]
+class CreateUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :users do |t|
       t.string :first_name
       t.string :last_name
+    end
+  end
+end
 ```
-    Executer les migrations (= créer ou modifier la base de donnée) :
-    $ rails db:migrate pour faire la migration
-```
+
+Tout se passe dans "def change". A la place de create_table on peut avoir d'autres commandes :
+* add_reference :column_name, :table_name
+<br> --> rajoute une colonne à une table existante
+* add_reference :books, :author, foreign_key: true
+<br> --> rajoute la clé "author" à la table "book"
+
+
+
+Executer les migrations (= créer ou modifier la base de donnée) :<br>
+`$ rails db:migrate pour faire la migration`
+
+
+### MVC = Model View Controller
 
 ### Models :
 
 Les modèles récupérent les infos depuis la db pour permettre aux view de les utiliser.
 
-    Créer un modèle et la migration correspondante :
-    $ rails generate model NomDuModel
+Créer un modèle et la migration correspondante :
+`$ rails g model NomDuModel`
 
 
 
-MVC = Model View Controller
+### Lier deux tables en bd : (2 étapes)
 
-Route :
-Controller :
-Model :
-View :
+#### Relation 1-1 ou 1-n
 
+- Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra à l'autre objet (cf partie migration)
 
-ActiveRecord : permet de gérer la base de données en ruby. C'est le M de MVC. Tu peux appliquer ton CRUD avec les méthodes de ActiveRecord :
-
-    CRUD :
-    Create : avec #create
-    Read : avec #find
-    Update : avec #update
-    Destroy : avec #destroy
-
-
-
-Lier deux tables en bd : (2 étapes)
-
-    - Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra à l'autre objet
-
-    ex :book appartient à son author, donc c'est book qui aura la clé étrangère
-    --> add_reference :books, :author, foreign_key: true
-
-
-    - Lier nos tables dans les models en utilisant has_many et belongs_to
+- Lier nos tables dans les models en utilisant :
     --> belongs_to :author
     --> has_many :chapters
     --> has_and_belongs_to_many :tags
@@ -83,6 +100,12 @@ Lier deux tables en bd : (2 étapes)
 
 Vérifier que deux tables sont liés via la console :
 
+
+#### Relation n-n
+
+Une table de jointure doit exister entre les deux :
+- Si elle existe :
+`has_many, through`
 
 
 SEED : Créer automatiquement des données random afin de tester une appli
