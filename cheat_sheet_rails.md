@@ -7,7 +7,7 @@
 Initialisation dossier rails :<br>
 `$ rails new nom_du_projet`
 
-Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
+Ou en précisant qu'on utilise postgre (et pas sqlite3) (gem pg) :<br>
 `$ rails new -d postgresql nom_du_project`
 
 Installer toutes les gems du gemfile :
@@ -16,12 +16,14 @@ Installer toutes les gems du gemfile :
 Créer la base de donnée :
 `$ rails db:create`
 
+
+<br>
 ### Console
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
 `$ rails console` ou `$ rails c`
 
-#### CRUD : Create Read Update Delete
+##### CRUD : Create Read Update Delete
 
 * Créer un User en base :<br>
 `User.create(name:"Jean-Michel", email:"jm@gmail.com")`
@@ -39,7 +41,16 @@ truc.save
 * Supprimer un truc :<br>
 `truc.delete` supprime un truc de la bd
 
+##### Association
 
+Pour associer une instance à une autre (et vérifier si la jointure marche) :<br>
+* si relation avec n : `shakespeare.books << macbeth`
+* sinon : `macbeth.author = shakespeare`
+
+Puis pour check si ça a marché : `shakespeare.books`
+
+
+<br>
 ### Migrations
 
 **Gérer une base de données dans rails se fait via des migrations qui crées et modifient des tables. On les retrouve dans le dossier db.**
@@ -80,24 +91,33 @@ Tout se passe dans "def change". A la place de create_table on peut avoir d'autr
 <br> --> rajoute la clé "author" à la table "book"
 
 
-
-
-
-
+<br>
 ### MVC = Model View Controller
 
-### Models :
+##### Models :
 
 Les modèles récupérent les infos depuis la db pour permettre aux view de les utiliser.
 
 Créer un modèle et la migration correspondante :
 `$ rails g model NomDuModel`
+<br>
+
+**Class name :** cours du jeudi semaine 4 à check
+
+##### Routes :
+
+check lundi semaine 5
+
+##### Controllers :
+
+check lundi semaine 5
 
 
 
+<br>
 ### Lier deux tables en bd : (2 étapes)
 
-#### Relation 1-1 ou 1-n
+##### Relation 1-1 ou 1-n
 
 - Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra (belongs) à l'autre objet (cf partie migration)
 
@@ -107,7 +127,7 @@ Créer un modèle et la migration correspondante :
   - `has_and_belongs_to_many :trucs`
 
 
-#### Relation n-n
+##### Relation n-n
 
 Une table de jointure doit exister entre les deux tables :
 
@@ -120,6 +140,7 @@ Une table de jointure doit exister entre les deux tables :
   `has_and_belongs_to_many :trucs`
 
 
+<br>
 ### SEED
 
 Rempli une base de donnée avec des entrée pré-programmées ou random depuis le fichier : /db/seeds.rb
@@ -149,6 +170,8 @@ require 'faker'
 end
 ```
 
+
+<br>
 ### RAILS-ERD (SCHEMA)
 
 Créer un SCHEMA de la base de donnée de rails en pdf :
