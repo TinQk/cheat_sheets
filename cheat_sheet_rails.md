@@ -13,6 +13,9 @@ Ou en précisant qu'on utilise postgresql (et pas sqlite3) :<br>
 Installer toutes les gems du gemfile :
 `$ bundle install`
 
+Créer la base de donnée :
+`$ rails db:create`
+
 ### Console
 
 Lancer la console pour s'amuser avec la base de donnée :<br>
@@ -39,9 +42,16 @@ truc.save
 
 ### Migrations
 
-Gérer une base de données dans rails se fait via des migrations (dossier db) :
+**Gérer une base de données dans rails se fait via des migrations qui crées et modifient des tables. On les retrouve dans le dossier db.**
+<br><br>
 
-Créér une table :<br>
+Executer les migrations générées (= créer ou modifier la base de donnée) :<br>
+`$ rails db:migrate`
+
+Vérifier si les migrations générées ont été éxecutées :<br>
+`$ rails db:migrate:status`
+
+Générer une migration qui crée une table :<br>
 `$ rails generate migration CreateTableName` ou `$ rails g migration CreateTableName`
 
 Créer une table de jointure : `$ rails g `
@@ -71,8 +81,7 @@ Tout se passe dans "def change". A la place de create_table on peut avoir d'autr
 
 
 
-Executer les migrations (= créer ou modifier la base de donnée) :<br>
-`$ rails db:migrate pour faire la migration`
+
 
 
 ### MVC = Model View Controller
@@ -90,51 +99,64 @@ Créer un modèle et la migration correspondante :
 
 #### Relation 1-1 ou 1-n
 
-- Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra à l'autre objet (cf partie migration)
+- Faire une migration qui va ajouter la clé étrangère dans la table qui représente l'objet qui appartiendra (belongs) à l'autre objet (cf partie migration)
 
 - Lier nos tables dans les models en utilisant :
-    --> belongs_to :author
-    --> has_many :chapters
-    --> has_and_belongs_to_many :tags
-
-
-Vérifier que deux tables sont liés via la console :
+  - `belongs_to :truc`
+  - `has_many :trucs`
+  - `has_and_belongs_to_many :trucs`
 
 
 #### Relation n-n
 
-Une table de jointure doit exister entre les deux :
-- Si elle existe :
-`has_many, through`
+Une table de jointure doit exister entre les deux tables :
+
+- Si elle existe, on vérifie qu'elle contient bien les clés étrangères des deux tables à joindre, et on ajoute has many through dans les deux modèles :<br>
+`has_many :trucs, through: join_table`
+
+- Si elle n'existe pas, on la crée via la commande :<br>
+  `$ rails g migration CreateJoinTableTruc1Truc2 truc1 truc2`
+  Puis dans les deux modèles on ajoute :<br>
+  `has_and_belongs_to_many :trucs`
 
 
-SEED : Créer automatiquement des données random afin de tester une appli
+### SEED
 
-    dans le fichier db/seeds.rb
-    Voici un exemple de seed :
-        100.times do |index|
-            user = User.create!(name: "Nom#{index}", email: "email#{index}@example.com")
-        end
+Rempli une base de donnée avec des entrée pré-programmées ou random depuis le fichier : /db/seeds.rb
+<br><br>
 
-    Run le fichier seeds.rb pour remplir la bd :
-    rails db:seed  # remplir sa db de random
+Un exemple de seed :
 
-    Faker : gem qui permet de créer des faux noms. Ne pas oublier "require 'faker'" dans seeds.rb
-    exemple de seed malin en utilisant la gem Faker :
-        require 'faker'
-        100.times do
-            user = User.create!(name: Faker::Company.name, email: Faker::Internet.email)
-        end
+```ruby
+100.times do |index|
+    user = User.create!(name: "Nom#{index}", email: "email#{index}@example.com")
+end
+```
 
+Commande pour run le fichier seeds.rb et remplir la bd :<br>
+`$ rails db:seed  # remplir sa db de random`
+<br>
 
+**Faker** : gem qui permet de créer des faux noms. Ne pas oublier "require 'faker'" dans seeds.rb
+<br>
+
+Un exemple de seed malin en utilisant la gem Faker :
+
+```ruby
+require 'faker'
+100.times do
+    user = User.create!(name: Faker::Company.name, email: Faker::Internet.email)
+end
+```
+
+### RAILS-ERD (SCHEMA)
 
 Créer un SCHEMA de la base de donnée de rails en pdf :
 
-    1) Ajouter la gem au gemfile :
-    gem 'rails-erd'
+1. Ajouter la gem au gemfile : `$ gem 'rails-erd'`
 
-    2) Installer graphviz sur l'ordinateur (ubuntu : sudo apt-get install graphviz )
+2. Installer graphviz sur l'ordinateur (ubuntu : `$ sudo apt-get install graphviz` )
 
-    3) Lancer la commande de création : rake erd
+3. Lancer la commande de création : `$ rake erd`
 
-    --> un pdf "erd.pdf" a été sauvegardé à la racine de votre projet rails.
+--> un pdf "erd.pdf" a été sauvegardé à la racine de votre projet rails.
