@@ -16,6 +16,8 @@ Installer toutes les gems du gemfile :
 Créer la base de donnée :
 `$ rails db:create`
 
+Démarrer un serveur rails pour les tests (localhost:3000/) :
+`$ rails server`
 
 <br>
 
@@ -41,6 +43,8 @@ truc.save
 `truc.update(...)`
 * Supprimer un truc :<br>
 `truc.delete` supprime un truc de la bd
+
+Il existe aussi le modèle REST qui fait 7 choses sur les ressources.
 
 #### Association
 
@@ -109,11 +113,45 @@ Créer un modèle et la migration correspondante :
 
 #### Routes :
 
-check lundi semaine 5
+* Le fichier routes.rb (dans config) redirige vers un controller en fonction de l'url demandée.
+
+* Rails utilise le REST pour ses routes et controller, c'est à dire les méthode #new, #create, #show, #index, #edit, #update, #destroy. Ces méthodes représentent le CRUD.
+
+* Il est possible et très facile de faire des routes qui suivent le REST avec resources.
+
+
+Afficher toutes les routes de l'application : `$ rails routes`
+
+
+
+
+Rails utilise 5 méthodes :
+
+* GET : utilisée pour envoyer une page à un user qui demande une page
+`get 'page_url', to: 'controller_name#method_name'`
+ex : `get '/static_pages/contact', to: 'static_pages#contact'`
+--> renvoyer vers la méthode 'contact' du controller 'StaticPages'
+
+* POST : utilisée pour recevoir de l'information d'un utilisateur qui permet de créer une ressource en base
+
+* PUT / PATCH : utilisées pour recevoir de l'information qui permet de mettre à jour une ressource en base
+
+* DELETE : utilisée pour supprimer une ressource en base
+
+
+
 
 #### Controllers :
 
-check lundi semaine 5
+Rails utilise le REST pour ses routes et controller, c'est à dire les méthode #new, #create, #show, #index, #edit, #update, #destroy. Ces méthodes représentent le CRUD.
+
+
+Générer un controller (et sa view au passage) :<br>
+`$ rails g controller controller_name method_name`
+<br>
+Exemple : `$ rails g controller static_pages home`
+
+
 
 
 
